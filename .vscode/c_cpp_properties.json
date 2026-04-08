@@ -4,7 +4,8 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "F:\\cuda\\include"
+                "${workspaceFolder}/core/include",
+                "F:/cuda/include"
             ],
             "defines": [
                 "_DEBUG",

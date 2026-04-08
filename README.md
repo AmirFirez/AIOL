@@ -85,6 +85,12 @@ The core forward pipeline is implemented and functional, but the framework is st
 
 * Weight initialization system
 
+### 🔹 Network
+
+* Initializie layers 
+* Connect layers and data and config togther
+
+
 ---
 
 

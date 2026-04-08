@@ -1,8 +1,8 @@
 #pragma once
 #include <vector>
 #include <string>
-#include <../../kernels/include/BiasActivation.cuh>
-#include <../../Utils/WeightInit.h>
+#include <BiasActivation.cuh>
+#include <WeightInit.h>
 
 struct Config {
     size_t input_size;                          // Number of input features

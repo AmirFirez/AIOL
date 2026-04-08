@@ -1,6 +1,6 @@
 #include <cuda_runtime.h>
 #include <cmath>
-#include "../include/BiasActivation.cuh"
+#include "BiasActivation.cuh"
 
 
 
@@ -93,7 +93,7 @@ __global__ void forward_bias_activation(const float* d_biases , float* pre_act ,
             break;
         
         case LogSigmoid:
-            act[neuron] = logf(1 + expf(-neuron_value));
+            act[neuron] = -logf(1 + expf(-neuron_value));
             break;
 
         default:
