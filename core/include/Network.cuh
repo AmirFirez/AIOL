@@ -38,12 +38,14 @@ class Network {
             float* inputs_to_feed = nullptr;
             cudaMalloc((void**)&inputs_to_feed , data.inputs.size() * sizeof(float));
             cudaMemcpy(inputs_to_feed , data.inputs.data() , data.inputs.size() * sizeof(float) , cudaMemcpyHostToDevice);
+            float* first_input = inputs_to_feed;
 
             for (size_t i = 0;i < config.layer_count;i++) { // Loop in layers to do forward
                 inputs_to_feed = layers[i].forward(inputs_to_feed,handle); // Does the forward in the layer with the inputs and cublas handle
             }
 
-            cudaFree(inputs_to_feed);
+            
+            cudaFree(first_input);
             return layers.back().get_output();
 
         }
