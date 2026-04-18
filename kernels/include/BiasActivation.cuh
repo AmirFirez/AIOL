@@ -3,29 +3,8 @@
 #include <cmath>
 #include <unordered_map>
 #include <string>
+#include "Activations.cuh"
 
-enum ActivationType {
-    Sigmoid,
-    Tanh,
-    ReLU,
-    LeakyReLU,
-    PReLU,
-    ELU,
-    SELU,
-    Softplus,
-    Swish,
-    Mish,
-    HardSigmoid,
-    HardTanh,
-    HardSwish,
-    Softsign,
-    Gaussian,
-    ArcTan,
-    Cube,
-    Linear,
-    ReLU6,
-    LogSigmoid
-};
 
 
 

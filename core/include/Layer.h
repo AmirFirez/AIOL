@@ -19,7 +19,7 @@ class Layer {
         float alpha;                                  // Alpha
         float beta;                                   // Beta
         float a;                                      // Used in some functions like ("PReLU" , "ELU" , etc)
-        int batch_size = 1;                           // Batch size defult 1 (not using batch system)
+        int batch_size = 1;                           // Batch size defult 1 
         size_t layer_idx;
         ActivationType activation;
 
@@ -29,7 +29,7 @@ class Layer {
         float* d_act = nullptr;                     // Activated outputs of the layer 1d array (batch_size * out_features)
         float* d_pre_act = nullptr;                 // Pre activated outputs of the layer 1d array (batch_size * out_features)
         float* d_delta = nullptr;                   // Delta (batch_size * out_features)
-
+        float* d_grad_buffer = nullptr;             // Used to store temporary stuff for the backward (batch_size * out_features)
 
 
     public:
@@ -40,7 +40,7 @@ class Layer {
             layer_idx = lyr_idx;
             in_features = (layer_idx == 0) ? cfg.input_size : cfg.neurons_per_layer[layer_idx-1];
             out_features = cfg.neurons_per_layer[layer_idx];
-            batch_size = cfg.batch;
+            batch_size = cfg.batch_size;
             alpha = cfg.alpha;
             beta = cfg.beta;
             a = cfg.a;
@@ -59,7 +59,7 @@ class Layer {
             cudaMalloc((void**)&d_act , (batch_size * out_features) * sizeof(float));
             cudaMalloc((void**)&d_pre_act , (batch_size * out_features) * sizeof(float));
             cudaMalloc((void**)&d_delta , (batch_size * out_features) * sizeof(float));
-
+            cudaMalloc((void**)&d_grad_buffer , (batch_size * out_features) * sizeof(float));
             // Moving data from cpu to gpu
 
             cudaMemcpy(d_weights , h_weights.data() , (in_features * out_features)  * sizeof(float) , cudaMemcpyHostToDevice);
@@ -75,6 +75,7 @@ class Layer {
             cudaFree(d_act);
             cudaFree(d_pre_act);
             cudaFree(d_delta);
+            cudaFree(d_grad_buffer);
         }
 
 
@@ -108,6 +109,8 @@ class Layer {
             return d_act;
 
         }
+
+        
 
         std::vector<float> get_output() {
             cudaMemcpy(h_act.data() , d_act , (batch_size * out_features) * sizeof(float) , cudaMemcpyDeviceToHost);

@@ -7,7 +7,7 @@
 struct Config {
     size_t input_size;                          // Number of input features
     size_t layer_count;                         // Number of layers
-    int batch;                                  // Batch size
+    int batch_size;                                  // Batch size
     std::vector<size_t> neurons_per_layer;      // Number of neurons per layer
     std::string loss;                           // Loss function name ("MSE","BCE",etc)
     WeightsType WeightsType;                   // Weights random generator type ("HE" , "XavierNormal" , etc)
