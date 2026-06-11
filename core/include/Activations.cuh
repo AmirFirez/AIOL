@@ -29,8 +29,6 @@ float activate(ActivationType type,float x,float a = 0.01f) {
     switch (type) {
         case Sigmoid:
             return 1.0f / (1.0f + expf(-x));
-            
-
         case Tanh:
             return tanhf(x);
             
