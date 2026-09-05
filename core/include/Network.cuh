@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "Layer.h"
+#include "Layer.cuh"
 #include "Config.h"
 #include "Data.h"
 
